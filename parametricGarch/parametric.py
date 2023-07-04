@@ -13,7 +13,6 @@ class Garch:
         Initializing the GARCH model.
 
         Parameters:
-        ---------------
             data: pandas.Series
                 Time series data
             vol: str, optional
@@ -61,7 +60,6 @@ class Garch:
         Get the summary of the fitted GARCH model.
 
         Returns:
-        ------------
             arch.univariate.base.ARCHModelResultSummary: Summary of the fitted model.
         """
         
@@ -73,7 +71,6 @@ class Garch:
         Get the conditional volatility of the fitted GARCH model.
 
         Returns:
-        ------------
             pandas.Series: Conditional volatility series.
         """
         
@@ -86,7 +83,6 @@ class Garch:
         Get the standardized residuals of the fitted GARCH model.
 
         Returns:
-        ------------
             pandas.Series: Standardized residuals series.
         """
         return self.result.std_resid
@@ -98,7 +94,6 @@ class Garch:
         Get the forecasted conditional mean of the GARCH model.
 
         Returns:
-        ------------
             pandas.DataFrame: Forecasted conditional mean series.
         """
         return self.prediction.mean
@@ -110,7 +105,6 @@ class Garch:
         Get the forecasted conditional variance of the GARCH model.
 
         Returns:
-        ------------
             pandas.DataFrame: Forecasted conditional variance series.
         """
         return self.prediction.variance
@@ -122,7 +116,6 @@ class Garch:
         Get the forecasted conditional variance of the residuals of the GARCH model.
 
         Returns:
-        ------------
             pandas.DataFrame: Forecasted conditional residual variance series.
         """
         return self.prediction.residual_variance
@@ -135,12 +128,10 @@ class Garch:
         Perform parametric bootstrapping to estimate the forecast distribution.
 
         Parameters:
-        ------------
             num_iterations: int, optional
                 Number of bootstrap iterations. Default is 1000.
 
         Returns:
-        ------------
             bool: True if the bootstrap is successful.
         """
         
@@ -187,7 +178,6 @@ class Garch:
         Get the summary of the bootstrapped model.
 
         Returns:
-        ------------
             arch.univariate.base.ARCHModelResultSummary: Summary of the bootstrapped model.
         """
         return self.bootstrap_result.summary()
@@ -200,7 +190,6 @@ class Garch:
         Get the forecasted mean and volatility list from the bootstrapped model.
 
         Returns:
-        ------------
             list: List of tuples containing forecasted mean and volatility for each bootstrap iteration.
         """
         
@@ -218,12 +207,10 @@ class Garch:
         Estimate risk measures: volatility and Value-at-Risk (VaR) using the bootstrapped model.
 
         Parameters:
-        ------------
             confidence_level: float, optional
                 Confidence level for calculating VaR and volatility. Default is 0.95.
 
         Returns:
-        ------------
             dict: Dictionary containing risk estimates including mean volatility, volatility confidence interval,
                   mean VaR, and VaR confidence interval.
         """
