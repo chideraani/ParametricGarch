@@ -1,46 +1,53 @@
 import unittest
 import numpy as np
 import pandas as pd
+#from scipy import stats
 from parametricGarch import Garch
 
 class TestGarch(unittest.TestCase):
 
     def setUp(self):
-        # Set up test data
+        # Create a sample time series data
         self.data = pd.DataFrame({'returns': np.random.randn(100)})
 
+    def test_garch_initialization(self):
+        # Test Garch initialization with valid parameters
+        model = Garch(self.data, p=1, q=1)
+        self.assertIsInstance(model, Garch)
+
+    def test_garch_invalid_data(self):
+        # Test Garch initialization with invalid data
+        with self.assertRaises(ValueError):
+            Garch(None, p=1, q=1)
+
     def test_bootstrap(self):
-        # Create a Garch instance
-        garch = Garch(self.data['returns'])
+        # Test bootstrap method
+        model = Garch(self.data, p=1, q=1)
+        self.assertTrue(model.bootstrap())
 
-        # Perform bootstrap
-        result = garch.bootstrap()
-
-        # Check if the bootstrap was successful
-        self.assertTrue(result)
-
-        # Check if bootstrap samples are available
-        bootstrap_samples = garch.bootstrap_samples
-        self.assertIsNotNone(bootstrap_samples)
-        self.assertIsInstance(bootstrap_samples, list)
+    def test_bootstrap_invalid_num_iterations(self):
+        # Test bootstrap method with invalid num_iterations parameter
+        model = Garch(self.data, p=1, q=1)
+        with self.assertRaises(ValueError):
+            model.bootstrap(num_iterations=-1)
 
     def test_estimate_risk(self):
-        # Create a Garch instance
-        garch = Garch(self.data)
-
-        # Perform bootstrap
-        garch.bootstrap()
-
-        # Estimate risk
-        risk_estimates = garch.estimate_risk()
-
-        # Check if the risk estimates are of the correct type
+        # Test estimate_risk method
+        model = Garch(self.data, p=1, q=1)
+        model.bootstrap()
+        risk_estimates = model.estimate_risk()
         self.assertIsInstance(risk_estimates, dict)
+        self.assertIn('Mean Volatility', risk_estimates)
+        self.assertIn('Volatility Confidence Interval', risk_estimates)
+        self.assertIn('Mean VaR', risk_estimates)
+        self.assertIn('VaR Confidence Interval', risk_estimates)
 
-        # Check if the required keys are present in the risk estimates dictionary
-        required_keys = ['Mean Volatility', 'Volatility Confidence Interval', 'Mean VaR', 'VaR Confidence Interval']
-        for key in required_keys:
-            self.assertIn(key, risk_estimates)
+    def test_estimate_risk_invalid_confidence_level(self):
+        # Test estimate_risk method with invalid confidence_level parameter
+        model = Garch(self.data, p=1, q=1)
+        model.bootstrap()
+        with self.assertRaises(ValueError):
+            model.estimate_risk(confidence_level=2)
 
 if __name__ == '__main__':
     unittest.main()

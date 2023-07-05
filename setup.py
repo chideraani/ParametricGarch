@@ -42,5 +42,5 @@ setup(
     ],
     packages=["parametricGarch"],
     include_package_data=True,
-    install_requires=["numpy", "arch"]
+    install_requires=["numpy", "arch", "pandas", "scipy"]
 )
