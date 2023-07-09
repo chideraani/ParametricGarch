@@ -4,6 +4,10 @@ from scipy import stats
 from arch import arch_model
 
 class Garch:
+
+    """
+    Parametric bootstrapping with GARCH models.
+    """
     
     def __init__(self, data, vol='Garch', p=1, q=1, dist='normal', update_freq=0, disp='off', horizon=1, start=None, reindex=False):
         
@@ -11,7 +15,7 @@ class Garch:
         Initializing the GARCH model.
 
         Parameters:
-            data: pandas.Series
+            data: pandas.Series, np.array, DataFrame
                 Time series data
             vol: str, optional
                 Name of the volatility model. Default is 'Garch'. Others are 'ARCH', 'EGARCH', 'FIGARCH', 'APARCH', and 'HARCH'
@@ -80,6 +84,12 @@ class Garch:
 
     @property
     def summary(self):
+        """
+        Get the summary of the fitted model.
+
+        Returns:
+            arch.univariate.base.ARCHModelResultSummary: Summary of the fitted model.
+        """
         if self.result is None:
             raise ValueError("No model result available. Please fit the GARCH model first.")
 
@@ -87,6 +97,12 @@ class Garch:
 
     @property
     def conditional_volatility(self):
+        """
+        Get the conditional volatility of the fitted model.
+
+        Returns:
+            pandas.Series: Conditional volatility series.
+        """
         if self.result is None:
             raise ValueError("No model result available. Please fit the GARCH model first.")
 
@@ -94,6 +110,12 @@ class Garch:
 
     @property
     def standardised_residuals(self):
+        """
+        Get the standardized residuals of the fitted model.
+
+        Returns:
+            pandas.Series: Standardized residuals series.
+        """
         if self.result is None:
             raise ValueError("No model result available. Please fit the GARCH model first.")
 
@@ -101,6 +123,12 @@ class Garch:
 
     @property
     def forecast_mean(self):
+        """
+        Get the forecasted conditional mean of the model.
+
+        Returns:
+            pandas.DataFrame: Forecasted conditional mean series.
+        """
         if self.prediction is None:
             raise ValueError("No forecast available. Please fit the GARCH model and generate forecast first.")
 
@@ -108,6 +136,12 @@ class Garch:
 
     @property
     def forecast_variance(self):
+        """
+        Get the forecasted conditional variance of the model.
+
+        Returns:
+            pandas.DataFrame: Forecasted conditional variance series.
+        """
         if self.prediction is None:
             raise ValueError("No forecast available. Please fit the GARCH model and generate forecast first.")
 
@@ -115,6 +149,12 @@ class Garch:
 
     @property
     def forecast_residual_variance(self):
+        """
+        Get the forecasted conditional variance of the residuals of the model.
+
+        Returns:
+            pandas.DataFrame: Forecasted conditional residual variance series.
+        """
         if self.prediction is None:
             raise ValueError("No forecast available. Please fit the GARCH model and generate forecast first.")
 
@@ -168,6 +208,12 @@ class Garch:
 
     @property
     def bootstrap_summary(self):
+        """
+        Get the summary of the bootstrapped model.
+
+        Returns:
+            arch.univariate.base.ARCHModelResultSummary: Summary of the bootstrapped model.
+        """
         if self.bootstrap_result is None:
             raise ValueError("No bootstrap result available. Please run the 'bootstrap' method first.")
 
@@ -175,6 +221,12 @@ class Garch:
 
     @property
     def bootstrap_samples(self):
+        """
+        Get the forecasted mean and volatility list from the bootstrapped model.
+
+        Returns:
+            list: List of tuples containing forecasted mean and volatility for each bootstrap iteration.
+        """
         if self._bootstrap_samples is None:
             raise ValueError("No bootstrap samples available. Please run the 'bootstrap' method to generate bootstrap samples.")
 

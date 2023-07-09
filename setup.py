@@ -31,7 +31,7 @@ setup(
         "Intended Audience :: Financial and Insurance Industry",
         "Natural Language :: English",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        "Development Status :: 1 - Planning",
+        "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
