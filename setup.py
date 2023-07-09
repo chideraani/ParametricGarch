@@ -12,7 +12,7 @@ HERE = path.abspath(path.dirname(__file__))
 with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-LONG_DESCRIPTION = 'A package that estimates the Volatility and Value-at-Risk (VaR) of financial assets using parametric bootstrapping via the GARCH model'
+LONG_DESCRIPTION = long_description
 
 # This call to setup() does all the work
 setup(
