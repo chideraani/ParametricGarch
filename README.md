@@ -4,7 +4,7 @@ A Python library that uses parametric bootstrapping via the GARCH model to estim
 ### Installation
 You can install parametricGarch using pip:
 ```
-pip install parametric-garch
+pip install parametricGarch
 ```
 
 ## Dependencies

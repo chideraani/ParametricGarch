@@ -8,19 +8,16 @@ from os import path
 # The directory containing this file
 HERE = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
-# with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
-#     long_description = f.read()
+#Get the long description from the README file
+with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
 
 LONG_DESCRIPTION = long_description
 
-# This call to setup() does all the work
 setup(
     name="parametricGarch",
-    version="0.0.3",
+    version="0.0.6",
     description="Parametric Bootstrapping via the GARCH model",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",

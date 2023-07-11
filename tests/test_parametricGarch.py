@@ -1,7 +1,6 @@
 import unittest
 import numpy as np
 import pandas as pd
-#from scipy import stats
 from parametricGarch import Garch
 
 class TestGarch(unittest.TestCase):
